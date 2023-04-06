@@ -72,3 +72,14 @@ func Delete(path string, query map[string]interface{}, body interface{}, content
 func Get(path string, query map[string]interface{}, body interface{}) (string, []byte, error) {
 	return do(http.MethodGet, path, query, body, AccessToken, "")
 }
+func PrintResult(status string, body []byte, err error) (string, []byte, error) {
+	d := bytes.NewBuffer(nil)
+	if len(body) > 0 {
+		e := json.Indent(d, body, " ", " ")
+		if e != nil {
+			panic(e)
+		}
+	}
+	fmt.Printf("%s %v\n%s", status, err, d.Bytes())
+	return status, body, err
+}
