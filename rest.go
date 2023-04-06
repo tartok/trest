@@ -72,6 +72,8 @@ func Delete(path string, query map[string]interface{}, body interface{}, content
 func Get(path string, query map[string]interface{}, body interface{}) (string, []byte, error) {
 	return do(http.MethodGet, path, query, body, AccessToken, "")
 }
+
+// PrintResult
 func PrintResult(status string, body []byte, err error) (string, []byte, error) {
 	d := bytes.NewBuffer(nil)
 	if len(body) > 0 {
